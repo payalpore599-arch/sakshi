@@ -1,4 +1,6 @@
 -- connection: 6ada3d28f0661cf5ae0f0a33
+-- schedule: 0 * * * *
+-- timezone: Asia/Calcutta
 
 <!DOCTYPE html>
 <html lang="mr">
