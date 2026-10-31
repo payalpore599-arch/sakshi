@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Key, BookOpen, Hash, Zap, CheckCircle, XCircle, AlertCircle, Loader2, RotateCcw, Bookmark, Globe, ScrollText, Calculator, Languages, Brain, Microscope, Coins, Scale } from 'lucide-react';
+import { ArrowRight, Sparkles, Key, BookOpen, Hash, Zap, CheckCircle, XCircle, AlertCircle, Loader2, RotateCcw, Bookmark, Globe, ScrollText, Calculator, Languages, Brain, Microscope, Coins, Scale, Lightbulb } from 'lucide-react';
 import { generateQuestions, getStoredApiKey, setStoredApiKey, type GeneratedQuestion } from '../services/gemini';
 
 const subjects = [
@@ -9,6 +9,7 @@ const subjects = [
   { id: 'गणित', label: 'गणित', Icon: Calculator },
   { id: 'मराठी', label: 'मराठी', Icon: Languages },
   { id: 'सामान्य ज्ञान', label: 'सामान्य ज्ञान', Icon: Brain },
+  { id: 'बुद्धिमता', label: 'बुद्धिमता', Icon: Lightbulb },
   { id: 'विज्ञान', label: 'विज्ञान', Icon: Microscope },
   { id: 'अर्थशास्त्र', label: 'अर्थशास्त्र', Icon: Coins },
   { id: 'राज्यशास्त्र', label: 'राज्यशास्त्र', Icon: Scale },
@@ -189,7 +190,7 @@ export default function GenerateQuestionsPage() {
             <BookOpen size={18} color="#667eea" />
             <span style={{ fontSize: 14, fontWeight: 700, color: '#1a1a3e' }}>Subject निवडा</span>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
             {subjects.map((s) => (
               <button
                 key={s.id}
