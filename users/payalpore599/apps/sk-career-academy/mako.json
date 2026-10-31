@@ -1,0 +1,8 @@
+{
+  "id": "6ae59f359bc32d28b15b954b",
+  "schemaVersion": 1,
+  "title": "SK Career Academy",
+  "description": "Maha Police Bharti preparation app with mock tests, leaderboard, bookmarks, progress tracking, and XP system. Complete exam preparation platform in Marathi.",
+  "entry": "src/main.tsx",
+  "bindings": []
+}
