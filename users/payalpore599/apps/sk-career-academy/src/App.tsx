@@ -5,6 +5,7 @@ import TestsPage from './pages/Tests';
 import LeaderboardPage from './pages/Leaderboard';
 import ProfilePage from './pages/Profile';
 import BookmarksPage from './pages/Bookmarks';
+import GenerateQuestionsPage from './pages/GenerateQuestions';
 import './styles.css';
 
 function BottomNav() {
@@ -47,6 +48,7 @@ function TestsLayout() { return <Layout><TestsPage /></Layout>; }
 function LeaderboardLayout() { return <Layout><LeaderboardPage /></Layout>; }
 function ProfileLayout() { return <Layout><ProfilePage /></Layout>; }
 function BookmarksLayout() { return <Layout><BookmarksPage /></Layout>; }
+function GenerateLayout() { return <Layout><GenerateQuestionsPage /></Layout>; }
 
 export default function App() {
   return (
@@ -57,6 +59,7 @@ export default function App() {
         <Route path="/leaderboard" element={<LeaderboardLayout />} />
         <Route path="/profile" element={<ProfileLayout />} />
         <Route path="/bookmarks" element={<BookmarksLayout />} />
+        <Route path="/generate" element={<GenerateLayout />} />
       </Routes>
     </BrowserRouter>
   );

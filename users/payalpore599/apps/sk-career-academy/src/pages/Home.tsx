@@ -77,6 +77,26 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* AI Generator Banner */}
+      <Link to="/generate" className="quick-card" style={{
+        margin: '0 16px 20px',
+        background: 'linear-gradient(135deg, #667eea, #764ba2)',
+        color: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 14,
+        padding: '16px 18px',
+        textDecoration: 'none',
+        border: 'none',
+      }}>
+        <Sparkles size={32} color="#fbbf24" />
+        <div style={{ flex: 1 }}>
+          <div style={{ fontSize: 15, fontWeight: 700, marginBottom: 2 }}>AI Question Generator</div>
+          <div style={{ fontSize: 11, opacity: 0.85 }}>Gemini AI ने instant questions तयार करा!</div>
+        </div>
+        <ArrowRight size={20} color="white" />
+      </Link>
+
       {/* Recommended */}
       <div className="section">
         <div className="section-header">
