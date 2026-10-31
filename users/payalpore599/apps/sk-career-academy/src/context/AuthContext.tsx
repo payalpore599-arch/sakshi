@@ -9,6 +9,9 @@ export interface User {
   password: string;
   role: UserRole;
   createdAt: string;
+  photo?: string;
+  height?: string;
+  weight?: string;
 }
 
 export interface StudentProgress {
@@ -26,7 +29,7 @@ export interface StudentProgress {
 interface AuthContextType {
   user: User | null;
   login: (email: string, password: string) => { success: boolean; error?: string };
-  signup: (name: string, email: string, password: string, role: UserRole) => { success: boolean; error?: string };
+  signup: (name: string, email: string, password: string, role: UserRole, photo?: string, height?: string, weight?: string) => { success: boolean; error?: string };
   logout: () => void;
   students: (User & { progress: StudentProgress })[];
 }
@@ -95,7 +98,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { success: true };
   };
 
-  const signup = (name: string, email: string, password: string, role: UserRole) => {
+  const signup = (name: string, email: string, password: string, role: UserRole, photo?: string, height?: string, weight?: string) => {
     const users = getUsers();
     if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
       return { success: false, error: 'या email वर आधीच account आहे' };
@@ -107,6 +110,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       id: 'user_' + Date.now(),
       name, email, password, role,
       createdAt: new Date().toISOString(),
+      photo, height, weight,
     };
     users.push(newUser);
     saveUsers(users);

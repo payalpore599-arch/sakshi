@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
-import { Trophy, Flame, Zap, Target, CheckCircle, XCircle, Timer, GraduationCap, Shield, Menu, Bell, Settings, ArrowRight } from 'lucide-react';
+import { Trophy, Flame, Zap, Target, CheckCircle, XCircle, Timer, GraduationCap, Shield, Menu, Bell, Settings, ArrowRight, Camera, Ruler, Weight } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 export default function ProfilePage() {
+  const { user } = useAuth();
   const streakDays = [
     { day: 'M', label: 'Mon', done: true },
     { day: 'T1', label: 'Tue', done: true },
@@ -30,18 +32,29 @@ export default function ProfilePage() {
 
       {/* Profile Card */}
       <div className="profile-header-card">
-        <div className="profile-avatar">महा<br/>पोलीस<br/>भरती</div>
+        {user?.photo ? (
+          <img src={user.photo} alt="Profile" style={{ width: 64, height: 64, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }} />
+        ) : (
+          <div className="profile-avatar">{user?.name?.charAt(0)?.toUpperCase() || '?'}</div>
+        )}
         <div className="profile-info">
           <div className="profile-name">
-            Siddhant Patil <CheckCircle size={16} color="#3b82f6" />
+            {user?.name || 'User'} <CheckCircle size={16} color="#3b82f6" />
           </div>
-          <div className="profile-role">Maha Police Aspirant</div>
-          <div>
-            <span className="profile-level">Level 9</span>
-            <span className="profile-xp-text">19519 / 22500 XP</span>
+          <div className="profile-role">{user?.role === 'teacher' ? 'Teacher' : 'Maha Police Aspirant'}</div>
+          <div style={{ display: 'flex', gap: 12, marginTop: 6 }}>
+            {user?.height && (
+              <span style={{ fontSize: 11, color: '#667eea', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 3 }}>
+                <Ruler size={12} /> {user.height} cm
+              </span>
+            )}
+            {user?.weight && (
+              <span style={{ fontSize: 11, color: '#16a34a', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 3 }}>
+                <Weight size={12} /> {user.weight} kg
+              </span>
+            )}
           </div>
         </div>
-        <div className="profile-edit">✏️ Edit</div>
       </div>
 
       {/* XP Bar */}

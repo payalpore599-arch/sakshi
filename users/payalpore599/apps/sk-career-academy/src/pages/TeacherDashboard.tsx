@@ -90,14 +90,18 @@ export default function TeacherDashboard() {
             background: 'white', borderRadius: 14, padding: 14, marginBottom: 10,
             boxShadow: '0 2px 8px rgba(0,0,0,0.04)', display: 'flex', alignItems: 'center', gap: 12,
           }}>
-            <div style={{
-              width: 44, height: 44, borderRadius: 12,
-              background: idx === 0 ? '#f59e0b' : idx === 1 ? '#9ca3af' : idx === 2 ? '#d97706' : '#667eea',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: 'white', fontWeight: 700, fontSize: 16, flexShrink: 0,
-            }}>
-              #{idx + 1}
-            </div>
+            {student.photo ? (
+              <img src={student.photo} alt={student.name} style={{ width: 44, height: 44, borderRadius: 12, objectFit: 'cover', flexShrink: 0 }} />
+            ) : (
+              <div style={{
+                width: 44, height: 44, borderRadius: 12,
+                background: idx === 0 ? '#f59e0b' : idx === 1 ? '#9ca3af' : idx === 2 ? '#d97706' : '#667eea',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: 'white', fontWeight: 700, fontSize: 16, flexShrink: 0,
+              }}>
+                {student.name.charAt(0).toUpperCase()}
+              </div>
+            )}
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: 14, fontWeight: 700, color: '#1a1a3e' }}>{student.name}</div>
               <div style={{ fontSize: 11, color: '#888' }}>{student.email}</div>
