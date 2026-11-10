@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation, Link, Navigate } from 'react-router-dom';
-import { Home, ClipboardList, Trophy, User, LogOut } from 'lucide-react';
+import { Home, ClipboardList, Trophy, User, LogOut, Calendar, PenTool, BookOpen } from 'lucide-react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import HomePage from './pages/Home';
 import TestsPage from './pages/Tests';
@@ -10,6 +10,10 @@ import GenerateQuestionsPage from './pages/GenerateQuestions';
 import LoginPage from './pages/Login';
 import SignupPage from './pages/Signup';
 import TeacherDashboard from './pages/TeacherDashboard';
+import AdminDashboard from './pages/AdminDashboard';
+import QuizPage from './pages/Quiz';
+import AttendancePage from './pages/Attendance';
+import WrittenPracticePage from './pages/WrittenPractice';
 import './styles.css';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -23,7 +27,7 @@ function BottomNav() {
   const { user, logout } = useAuth();
   const isActive = (path: string) => location.pathname === path ? 'active' : '';
 
-  if (!user) return null;
+  if (!user || user.role === 'admin') return null;
 
   const studentLinks = [
     { to: '/', icon: Home, label: 'Home' },
@@ -71,7 +75,8 @@ function HomeLayout() {
   return (
     <ProtectedRoute>
       <Layout>
-        {user?.role === 'teacher' ? <TeacherDashboard /> : <HomePage />}
+        {user?.role === 'admin' ? <AdminDashboard /> :
+         user?.role === 'teacher' ? <TeacherDashboard /> : <HomePage />}
       </Layout>
     </ProtectedRoute>
   );
@@ -81,6 +86,9 @@ function LeaderboardLayout() { return <ProtectedRoute><Layout><LeaderboardPage /
 function ProfileLayout() { return <ProtectedRoute><Layout><ProfilePage /></Layout></ProtectedRoute>; }
 function BookmarksLayout() { return <ProtectedRoute><Layout><BookmarksPage /></Layout></ProtectedRoute>; }
 function GenerateLayout() { return <ProtectedRoute><Layout><GenerateQuestionsPage /></Layout></ProtectedRoute>; }
+function QuizLayout() { return <ProtectedRoute><Layout><QuizPage /></Layout></ProtectedRoute>; }
+function AttendanceLayout() { return <ProtectedRoute><Layout><AttendancePage /></Layout></ProtectedRoute>; }
+function WrittenLayout() { return <ProtectedRoute><Layout><WrittenPracticePage /></Layout></ProtectedRoute>; }
 
 export default function App() {
   return (
@@ -95,6 +103,9 @@ export default function App() {
           <Route path="/profile" element={<ProfileLayout />} />
           <Route path="/bookmarks" element={<BookmarksLayout />} />
           <Route path="/generate" element={<GenerateLayout />} />
+          <Route path="/quiz/:subject" element={<QuizLayout />} />
+          <Route path="/attendance" element={<AttendanceLayout />} />
+          <Route path="/practice" element={<WrittenLayout />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

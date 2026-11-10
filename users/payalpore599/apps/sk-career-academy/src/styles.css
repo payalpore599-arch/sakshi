@@ -1487,3 +1487,185 @@ body {
 .animate-spin {
   animation: spin 1s linear infinite;
 }
+
+/* Timer Display */
+.timer-display {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.15);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+}
+
+.timer-display.timer-danger {
+  background: #ef4444;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Quiz Options */
+.quiz-option {
+  padding: 14px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+}
+
+.quiz-option:hover {
+  border-color: #667eea;
+  background: rgba(102,126,234,0.05);
+}
+
+.quiz-option.selected {
+  border-color: #667eea;
+  background: #ede9fe;
+}
+
+.quiz-option-letter {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.quiz-option.selected .quiz-option-letter {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+/* Stat Box */
+.stat-box {
+  background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1));
+  border-radius: 15px;
+  padding: 16px;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 28px;
+  font-weight: 700;
+  color: #667eea;
+}
+
+.stat-label {
+  color: #888;
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+/* Subject Quiz Card */
+.subject-quiz-card {
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 14px;
+  padding: 14px;
+  text-align: center;
+  transition: all 0.2s;
+  cursor: pointer;
+  display: block;
+}
+
+.subject-quiz-card:hover {
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102,126,234,0.15);
+}
+
+/* Quiz Size Button */
+.quiz-size-btn {
+  background: #1a1a3e;
+  color: white;
+  border: none;
+  padding: 10px 8px;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.quiz-size-btn:hover {
+  background: #2d1b69;
+}
+
+/* Attendance Record */
+.attendance-record {
+  background: white;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  border-left: 4px solid;
+}
+
+.attendance-record.present {
+  border-left-color: #16a34a;
+}
+
+.attendance-record.absent {
+  border-left-color: #ef4444;
+}
+
+/* Attendance Day (toggle) */
+.attendance-day {
+  padding: 14px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 8px;
+  border: 2px solid #e0e0e0;
+  background: white;
+}
+
+.attendance-day:hover {
+  transform: scale(1.01);
+}
+
+.attendance-day.present {
+  background: #dcfce7;
+  border-color: #16a34a;
+  color: #16a34a;
+}
+
+.attendance-day.absent {
+  background: #fef2f2;
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.attendance-day.none {
+  background: #f8f8fc;
+  border-color: #e0e0e0;
+  color: #888;
+}
+
+/* Wrong answer in quiz review */
+.bookmark-option.wrong {
+  border-color: #ef4444;
+  background: #fef2f2;
+}

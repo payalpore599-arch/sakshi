@@ -113,8 +113,15 @@ export default function LoginPage() {
         </div>
       </div>
 
+      {/* Admin Login Hint */}
+      <div style={{ marginTop: 16, background: 'rgba(255,255,255,0.1)', borderRadius: 12, padding: '10px 16px', maxWidth: 380, width: '100%' }}>
+        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 11, textAlign: 'center' }}>
+          👑 Admin: Email + password "email" टाका
+        </p>
+      </div>
+
       {/* Footer */}
-      <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12, marginTop: 24, textAlign: 'center' }}>
+      <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12, marginTop: 16, textAlign: 'center' }}>
         © 2026 SK Career Academy. All rights reserved.
       </p>
     </div>

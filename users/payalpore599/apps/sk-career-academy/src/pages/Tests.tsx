@@ -1,7 +1,14 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Clock, Target, FileText, Zap, BookOpen, Menu, Bell, Settings, Trophy, ListChecks, Sparkles, Globe, Map, Award, TrendingUp } from 'lucide-react';
+import { ArrowRight, Clock, Target, FileText, Zap, BookOpen, Bell, Settings, Trophy, ListChecks, Sparkles, Globe, Award, TrendingUp } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 export default function TestsPage() {
+  const { user, quizResults } = useAuth();
+  const myResults = quizResults.filter(r => r.email === user?.email);
+  const totalSolved = myResults.reduce((s, r) => s + r.total, 0);
+  const completed = myResults.length;
+  const avgScore = completed > 0 ? Math.round(myResults.reduce((s, r) => s + r.score, 0) / completed) : 0;
+
   return (
     <div>
       {/* Header */}
@@ -28,71 +35,123 @@ export default function TestsPage() {
           <h3>Marathi Mock Test Series</h3>
           <p>Test your preparation in Marathi and evaluate your progress.</p>
         </div>
-        <div className="progress-circle">39%</div>
+        <div className="progress-circle">{avgScore}%</div>
       </div>
 
       {/* Mock Stats */}
       <div className="mock-stats">
         <div className="mock-stat">
-          <div className="ms-value">70</div>
+          <div className="ms-value">{totalSolved}</div>
           <div className="ms-label">Questions Solved</div>
         </div>
         <div className="mock-stat">
-          <div className="ms-value">7</div>
+          <div className="ms-value">{completed}</div>
           <div className="ms-label">Completed</div>
         </div>
         <div className="mock-stat">
-          <div className="ms-value">39%</div>
+          <div className="ms-value">{avgScore}%</div>
           <div className="ms-label">Average Score</div>
         </div>
       </div>
 
-      {/* Quick Test */}
-      <div className="test-type-card">
-        <div className="test-type-header">
-          <h4><Zap size={18} color="#667eea" style={{ verticalAlign: 'middle', marginRight: 6 }} />Quick Test</h4>
-          <span className="time-badge">10-15 Minutes</span>
-        </div>
-        <div className="test-type-subtitle">Fast Test</div>
-        <div className="test-type-desc">Useful for quick practice in a short time.</div>
-        <div className="test-type-meta">
-          <span><Target size={14} /> 10 Questions</span>
-          <span><Award size={14} /> 10 Marks</span>
-          <span><Clock size={14} /> 7 Mins</span>
-        </div>
-        <button className="start-test-btn">Start Test <ArrowRight size={18} /></button>
-      </div>
+      {/* Subject Quiz Options */}
+      <div style={{ padding: '0 16px', marginBottom: 16 }}>
+        <h3 style={{ fontSize: 16, fontWeight: 700, color: '#1a1a3e', marginBottom: 12 }}>
+          <Sparkles size={18} color="#667eea" style={{ verticalAlign: 'middle', marginRight: 6 }} />
+          Subject Quiz - निवडा
+        </h3>
 
-      {/* Mini Mock */}
-      <div className="test-type-card">
-        <div className="test-type-header">
-          <h4><Zap size={18} color="#7c3aed" style={{ verticalAlign: 'middle', marginRight: 6 }} />Mini Mock</h4>
-          <span className="time-badge">20-30 Minutes</span>
+        {/* Marathi */}
+        <div className="test-type-card" style={{ marginBottom: 12 }}>
+          <div className="test-type-header">
+            <h4><BookOpen size={18} color="#667eea" style={{ verticalAlign: 'middle', marginRight: 6 }} />📖 मराठी व्याकरण</h4>
+          </div>
+          <div className="test-type-subtitle">संधी, समास, अलंकार, व्याकरण</div>
+          <div className="test-type-desc">मराठी व्याकरणावर आधारित प्रश्न</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, marginTop: 12 }}>
+            <Link to="/quiz/marathi?count=25&time=20" className="quiz-size-btn">
+              <div style={{ fontSize: 14, fontWeight: 700 }}>25 Q</div>
+              <div style={{ fontSize: 10 }}>20 Min</div>
+            </Link>
+            <Link to="/quiz/marathi?count=50&time=45" className="quiz-size-btn">
+              <div style={{ fontSize: 14, fontWeight: 700 }}>50 Q</div>
+              <div style={{ fontSize: 10 }}>45 Min</div>
+            </Link>
+            <Link to="/quiz/marathi?count=100&time=90" className="quiz-size-btn">
+              <div style={{ fontSize: 14, fontWeight: 700 }}>100 Q</div>
+              <div style={{ fontSize: 10 }}>90 Min</div>
+            </Link>
+          </div>
         </div>
-        <div className="test-type-subtitle">Mini Mock Test</div>
-        <div className="test-type-desc">Medium-level practice test.</div>
-        <div className="test-type-meta">
-          <span><Target size={14} /> 25 Questions</span>
-          <span><Award size={14} /> 25 Marks</span>
-          <span><Clock size={14} /> 20 Mins</span>
-        </div>
-        <button className="start-test-btn">Start Test <ArrowRight size={18} /></button>
-      </div>
 
-      {/* Full Mock */}
-      <div className="test-type-card">
-        <div className="test-type-header">
-          <h4><FileText size={18} color="#2563eb" style={{ verticalAlign: 'middle', marginRight: 6 }} />Full Mock</h4>
-          <span className="time-badge">45-60 Minutes</span>
+        {/* GK */}
+        <div className="test-type-card" style={{ marginBottom: 12 }}>
+          <div className="test-type-header">
+            <h4><Globe size={18} color="#16a34a" style={{ verticalAlign: 'middle', marginRight: 6 }} />🌍 GK/GS</h4>
+          </div>
+          <div className="test-type-subtitle">इतिहास, भूगोल, विज्ञान, राज्यघटना</div>
+          <div className="test-type-desc">सामान्य ज्ञान प्रश्न</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, marginTop: 12 }}>
+            <Link to="/quiz/gk?count=25&time=20" className="quiz-size-btn">
+              <div style={{ fontSize: 14, fontWeight: 700 }}>25 Q</div>
+              <div style={{ fontSize: 10 }}>20 Min</div>
+            </Link>
+            <Link to="/quiz/gk?count=50&time=45" className="quiz-size-btn">
+              <div style={{ fontSize: 14, fontWeight: 700 }}>50 Q</div>
+              <div style={{ fontSize: 10 }}>45 Min</div>
+            </Link>
+            <Link to="/quiz/gk?count=100&time=90" className="quiz-size-btn">
+              <div style={{ fontSize: 14, fontWeight: 700 }}>100 Q</div>
+              <div style={{ fontSize: 10 }}>90 Min</div>
+            </Link>
+          </div>
         </div>
-        <div className="test-type-subtitle">Full Mock Test</div>
-        <div className="test-type-desc">Full mock test based on exam pattern.</div>
-        <div className="test-type-meta">
-          <span><Target size={14} /> 50 Questions</span>
-          <span><Award size={14} /> 50 Marks</span>
-          <span><Clock size={14} /> 40 Mins</span>
+
+        {/* Ganit */}
+        <div className="test-type-card" style={{ marginBottom: 12 }}>
+          <div className="test-type-header">
+            <h4><Target size={18} color="#f59e0b" style={{ verticalAlign: 'middle', marginRight: 6 }} />🔢 गणित</h4>
+          </div>
+          <div className="test-type-subtitle">टक्केवारी, सरासरी, नफा-तोटा, व्याज</div>
+          <div className="test-type-desc">गणितीय प्रश्न (auto-generated)</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, marginTop: 12 }}>
+            <Link to="/quiz/ganit?count=25&time=20" className="quiz-size-btn">
+              <div style={{ fontSize: 14, fontWeight: 700 }}>25 Q</div>
+              <div style={{ fontSize: 10 }}>20 Min</div>
+            </Link>
+            <Link to="/quiz/ganit?count=50&time=45" className="quiz-size-btn">
+              <div style={{ fontSize: 14, fontWeight: 700 }}>50 Q</div>
+              <div style={{ fontSize: 10 }}>45 Min</div>
+            </Link>
+            <Link to="/quiz/ganit?count=100&time=90" className="quiz-size-btn">
+              <div style={{ fontSize: 14, fontWeight: 700 }}>100 Q</div>
+              <div style={{ fontSize: 10 }}>90 Min</div>
+            </Link>
+          </div>
         </div>
-        <button className="start-test-btn">Start Test <ArrowRight size={18} /></button>
+
+        {/* Buddhimata */}
+        <div className="test-type-card" style={{ marginBottom: 12 }}>
+          <div className="test-type-header">
+            <h4><Zap size={18} color="#ef4444" style={{ verticalAlign: 'middle', marginRight: 6 }} />🧠 बुद्धिमत्ता</h4>
+          </div>
+          <div className="test-type-subtitle">श्रेणी, दिशा, तर्कशक्ती, शब्दकोड</div>
+          <div className="test-type-desc">बुद्धिमत्ता चाचणी प्रश्न</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, marginTop: 12 }}>
+            <Link to="/quiz/buddhi?count=25&time=20" className="quiz-size-btn">
+              <div style={{ fontSize: 14, fontWeight: 700 }}>25 Q</div>
+              <div style={{ fontSize: 10 }}>20 Min</div>
+            </Link>
+            <Link to="/quiz/buddhi?count=50&time=45" className="quiz-size-btn">
+              <div style={{ fontSize: 14, fontWeight: 700 }}>50 Q</div>
+              <div style={{ fontSize: 10 }}>45 Min</div>
+            </Link>
+            <Link to="/quiz/buddhi?count=100&time=90" className="quiz-size-btn">
+              <div style={{ fontSize: 14, fontWeight: 700 }}>100 Q</div>
+              <div style={{ fontSize: 10 }}>90 Min</div>
+            </Link>
+          </div>
+        </div>
       </div>
 
       {/* Why Take Mock Tests */}
